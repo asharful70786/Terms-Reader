@@ -47,7 +47,7 @@ function ActionHub() {
 
     try {
       setSending(true);
-      const res = await fetch("http://localhost:5000/api/create", {
+      const res = await fetch("http://localhost:5000/api/create-report", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ text: pastedText }),
@@ -58,7 +58,6 @@ function ActionHub() {
       }
       const data = await res.json();
       console.log(data);
-      alert("✅ Sent to backend: " + JSON.stringify(data));
     } catch (err) {
       console.error(err);
       alert("❌ Error sending data");
@@ -68,7 +67,9 @@ function ActionHub() {
   };
 
   return (
+  
     <section className="min-h-screen bg-gradient-to-b from-[#0a0a0f] via-[#1e1b4b] to-black flex items-center justify-center p-6 text-white">
+      
       <div className="w-full max-w-6xl bg-gray-900/60 backdrop-blur-xl rounded-2xl shadow-2xl p-6 flex flex-col gap-6">
         <h1 className="text-2xl font-bold text-center mb-2">
           Upload / Paste Image or Text
@@ -129,6 +130,7 @@ function ActionHub() {
         </div>
       </div>
     </section>
+    
   );
 }
 
