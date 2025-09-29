@@ -3,6 +3,7 @@ import HomePage from './HomePage'
 import ClientsSection from './PartnersSection'
 
 import ActionHub from '../components/Common/ActionHub'
+import Footer from '../components/Layout/Footer'
 
 function IndexPage() {
   return (
@@ -10,7 +11,9 @@ function IndexPage() {
    <NavBar/>
     <HomePage/>
     <ActionHub/>
-    <ClientsSection/>
+    {/* <ClientsSection/> */}
+
+    <Footer/>
     </>
   )
 }

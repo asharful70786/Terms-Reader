@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { createWorker } from "tesseract.js";
+import ReportViewer from "./ReportView";
 
 function ActionHub() {
   const [pastedText, setPastedText] = useState("");
   const [imageUrl, setImageUrl] = useState(null);
   const [loading, setLoading] = useState(false);
   const [sending, setSending] = useState(false);
+  const [report, setReport] = useState(null); // NEW state for response
 
   useEffect(() => {
     const handlePaste = async (event) => {
@@ -18,7 +20,6 @@ function ActionHub() {
           const url = URL.createObjectURL(file);
           setImageUrl(url);
 
-          // using  Tesseract (ocr - img to text generator on Frontend)
           setLoading(true);
           const worker = await createWorker("eng");
           const { data } = await worker.recognize(file);
@@ -39,6 +40,7 @@ function ActionHub() {
     window.addEventListener("paste", handlePaste);
     return () => window.removeEventListener("paste", handlePaste);
   }, []);
+
   const handleCreate = async () => {
     if (!pastedText.trim()) {
       alert("Please paste text or image first!");
@@ -53,11 +55,10 @@ function ActionHub() {
         body: JSON.stringify({ text: pastedText }),
       });
 
-      if (!res.ok) {
-        throw new Error("Failed to send data");
-      }
+      if (!res.ok) throw new Error("Failed to send data");
+
       const data = await res.json();
-      console.log(data);
+      setReport(data.result || JSON.stringify(data)); 
     } catch (err) {
       console.error(err);
       alert("❌ Error sending data");
@@ -67,14 +68,12 @@ function ActionHub() {
   };
 
   return (
-  
     <section className="min-h-screen bg-gradient-to-b from-[#0a0a0f] via-[#1e1b4b] to-black flex items-center justify-center p-6 text-white">
-      
       <div className="w-full max-w-6xl bg-gray-900/60 backdrop-blur-xl rounded-2xl shadow-2xl p-6 flex flex-col gap-6">
         <h1 className="text-2xl font-bold text-center mb-2">
           Upload / Paste Image or Text
         </h1>
-        
+
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {/* Left: Image Area */}
           <div className="flex flex-col items-center justify-center border-2 border-dashed border-gray-600 rounded-xl p-4 bg-gray-800/50">
@@ -118,7 +117,6 @@ function ActionHub() {
             <label>
               <input type="checkbox" className="mr-2" /> Auto OCR
             </label>
-           
           </div>
           <button
             onClick={handleCreate}
@@ -128,9 +126,11 @@ function ActionHub() {
             {sending ? "🚀 Sending..." : "Generate Report"}
           </button>
         </div>
+
+        {/* Show Report in another component */}
+        <ReportViewer report={report} />
       </div>
     </section>
-    
   );
 }
 
