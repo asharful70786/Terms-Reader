@@ -4,6 +4,7 @@ import ReportViewer from "./ReportView";
 import LimitReachedPopup from "./LimitReachedPopup";
 
 function ActionHub() {
+  const BaseUrl = "https://api.termreader.zenpix.shop"
   const [pastedText, setPastedText] = useState("");
   const [imageUrl, setImageUrl] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -91,7 +92,7 @@ function ActionHub() {
 
     try {
       setSending(true);
-      const res = await fetch("http://localhost:5000/api/create-report", {
+      const res = await fetch(`${BaseUrl}/api/create-report`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ text: pastedText }),
