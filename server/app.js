@@ -10,12 +10,23 @@ import ReportRoute from "./Routes/ReportRoutes.js";
 
 const app = express();
 app.use(express.json());
-app.use(cors(
-  {
-    origin: "https://term.zenpix.shop",
+const allowedOrigins = [
+  "http://localhost:5173",
+  "https://term.zenpix.shop"
+];
+
+app.use(
+  cors({
+    origin: (origin, callback) => {
+      if (!origin) return callback(null, true);
+      if (allowedOrigins.includes(origin)) {
+        return callback(null, true);
+      }
+      return callback(new Error("Not allowed by CORS"));
+    },
     credentials: true
-  }
-));
+  })
+);
 // app.use(cookieParser());
 
 app.get("/", (req, res) => {

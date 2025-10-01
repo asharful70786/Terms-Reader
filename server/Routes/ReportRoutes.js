@@ -9,7 +9,7 @@ const router = express.Router();
 
 router.use(rateLimit({
   windowMs: 24 * 60 * 60 * 1000, 
-  max: 1, 
+  max:10,
   message: {
     success: false,
     error: "Daily limit reached",
