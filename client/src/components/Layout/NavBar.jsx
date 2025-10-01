@@ -12,12 +12,14 @@ import {
   TbPackage,
   TbPhone,
   TbReport,
+  TbHearts
 } from "react-icons/tb";
+
 
 const navItems = [
   { name: "Home", to: "/", icon: <TbHome className="w-5 h-5" /> },
   // { name: "Projects", to: "/projects", icon: <TbPackage className="w-5 h-5" /> },
-  { name: "Contact", to: "/contact", icon: <TbPhone className="w-5 h-5" /> },
+  { name: "Donate", to: "/donate", icon: <TbHearts className="w-5 h-5" /> },
 ];
 
 const NavBar = () => {
@@ -209,29 +211,6 @@ const NavBar = () => {
                     </motion.button>
                   ))}
                 </nav>
-
-                {/* Mobile Download Button */}
-                <motion.div
-                  initial={{ y: 30, opacity: 0 }}
-                  animate={{ y: 0, opacity: 1 }}
-                  transition={{ delay: 0.4 }}
-                  className="mt-8"
-                >
-                  <Button
-                    asChild
-                    className="w-full bg-gradient-to-r from-blue-500 via-purple-500 to-gray-800 hover:from-blue-600 hover:via-purple-600 hover:to-gray-900 text-white rounded-xl shadow-2xl transition-all px-6 py-4 border-0"
-                  >
-                    <a
-                      href={pdfUrl}
-                      download
-                      className="flex items-center justify-center gap-2"
-                    >
-                      <TbDownload className="w-4 h-4" />
-                      Download Catalog
-                      <TbReport className="w-4 h-4" />
-                    </a>
-                  </Button>
-                </motion.div>
               </div>
             </motion.div>
           </>

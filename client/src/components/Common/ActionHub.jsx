@@ -5,7 +5,7 @@ import LimitReachedPopup from "./LimitReachedPopup";
 
 function ActionHub() {
   // const BaseUrl = "http://localhost:5000" //localhost
-  const BaseUrl = "https://term.zenpix.shop";
+  const BaseUrl = "https://api.termreader.zenpix.shop";
   const [pastedText, setPastedText] = useState("");
   const [imageUrl, setImageUrl] = useState(null);
   const [loading, setLoading] = useState(false);
