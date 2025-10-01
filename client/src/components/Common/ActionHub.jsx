@@ -4,7 +4,8 @@ import ReportViewer from "./ReportView";
 import LimitReachedPopup from "./LimitReachedPopup";
 
 function ActionHub() {
-  const BaseUrl = "https://api.termreader.zenpix.shop"
+  // const BaseUrl = "http://localhost:5000" //localhost
+  const BaseUrl = "https://term.zenpix.shop";
   const [pastedText, setPastedText] = useState("");
   const [imageUrl, setImageUrl] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -263,6 +264,7 @@ function ActionHub() {
 
         {/* Report Viewer */}
         <LimitReachedPopup error={error} />
+      {console.log(`error -> ${error}`)}
         <ReportViewer report={report} loading={sending || loading} />
       </div>
     </section>
