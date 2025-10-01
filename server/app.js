@@ -15,18 +15,10 @@ const allowedOrigins = [
   "https://term.zenpix.shop"
 ];
 
-app.use(
-  cors({
-    origin: (origin, callback) => {
-      if (!origin) return callback(null, true);
-      if (allowedOrigins.includes(origin)) {
-        return callback(null, true);
-      }
-      return callback(new Error("Not allowed by CORS"));
-    },
-    credentials: true
-  })
-);
+app.use(cors({
+  origin : "https://term.zenpix.shop",
+  credentials: true
+}))
 // app.use(cookieParser());
 
 app.get("/", (req, res) => {
